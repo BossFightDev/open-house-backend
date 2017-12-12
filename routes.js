@@ -1,4 +1,6 @@
 const express = require('express')
+const { Lead } = require('./models')
+
 const router = express.Router()
 
 router.get('/listings', (req, res) => {
