@@ -14,7 +14,7 @@ const api_secret = process.env.APISECRET || config.apiSecret
 //   api_secret,
 // })
 
-const upload = multer({ dest : './public/uploads'}).single('userPhoto')
+const upload = multer({ dest : './public/uploads'}).single('photo')
 
 const router = express.Router()
 
