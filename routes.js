@@ -19,7 +19,7 @@ router.get('/listings', (req, res) => {
   res.send({ Success: 'clap clap'})
 })
 router.post('/user', (req, res) => {
-  const {firstname, lastname, username, password, phonenumber, company }
+  const {firstname, lastname, username, password, phonenumber, company } = req.body
 })
 router.post('/picture', (req, res)=> {
   cloudinary.uploader.upload(req.body.file, (result) => {
