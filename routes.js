@@ -26,7 +26,9 @@ router.post('/user', (req, res) => {
 })
 router.post('/photo', function(req,res){
 	upload(req, res, function(err){		
-		if(err){ return res.end("Error")};
+		if(err){
+      console.log(`Err: ${err}`)
+      return res.end("Error")};
 		console.log(req);
 		res.end("file uploaded")
 
