@@ -1,13 +1,16 @@
 const express = require('express')
 const cloudinary = require('cloudinary')
-
-const { cloudName, apiKey, apiSecret } = require('./config')
+let config
+!process.env.CNAME? config = require('./config') : null
 const { Property, Lead, OpenHouse, User } = require('./models')
+const cloud_name = process.env.CNAME || config.cloudName
+const api_key = process.env.APIKEY || config.apiKey
+const api_secret = process.env.APISECRET || config.apiSecret
 
 cloudinary.config({
-  cloud_name: cloudName,
-  api_key: apiKey,
-  api_secret: apiSecret,
+  cloud_name,
+  api_key,
+  api_secret,
 })
 
 const router = express.Router()
