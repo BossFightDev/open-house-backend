@@ -29,8 +29,8 @@ router.post('/photo', function(req,res){
 		if(err){
       console.log(`Err: ${err}`)
       return res.end("Error")};
-		console.log(req);
-		res.end("file uploaded")
+		// console.log(req);
+		// res.end("file uploaded")
 
 		cloudinary.config({ 
 	      cloud_name, 
@@ -40,6 +40,7 @@ router.post('/photo', function(req,res){
 
     cloudinary.uploader.upload(req.file.path, function(result) { 
       console.log(result);
+      res.send(result)
         // //create an urembo product
         // var photo = new Photo();
         //   photo.name = req.body.name;
