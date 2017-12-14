@@ -30,7 +30,7 @@ const OpenHouseSchema = new Schema({
     ref: "Property"
   },
   date: Date,
-  guest: Number,
+  guests: Number,
   image: String,
   phoneq: Boolean,
   agentq: Boolean,

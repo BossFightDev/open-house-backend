@@ -19,13 +19,30 @@ const upload = multer({ dest : './public/uploads'}).single('photo')
 const router = express.Router()
 
 router.get('/listings', (req, res) => {
-  res.send({ Success: 'clap clap'})
+  Property.find({}, (error, properties) => {
+    if(error) {
+      console.log(error)
+      return
+    }
+    res.json({properties})
+  })
 })
+
 router.post('/user', (req, res) => {
   const {firstname, lastname, username, password, phonenumber, company } = req.body
+  const newUser = new User({firstname, lastname, username, password, phonenumber, company })
+  newUser.save((error, user) => {
+    if (error) {
+      console.log(error);
+      res.status(422)
+      return
+    }
+    console.log(`***User added: ****${JSON.stringify(user)}`)
+  })
 })
 router.post('/photo', function(req,res){
-	upload(req, res, function(err){		
+  const { MLS } = req.body
+	upload(req, res, function(err){	
 		if(err){
       console.log(`Err: ${err}`)
       return res.end("Error")};
@@ -41,22 +58,106 @@ router.post('/photo', function(req,res){
     cloudinary.uploader.upload(req.file.path, function(result) { 
       console.log(result);
       res.send(result)
-        // //create an urembo product
-        // var photo = new Photo();
-        //   photo.name = req.body.name;
-        //   photo.picture = result.url;
-        //   photo.place = req.body.place;
-        //   photo.city = req.body.city;
-        // //save the product and check for errors
-        // photo.save(function(err, photos){
-        //   if(err) 
-        //     res.send(err);
-        //   res.json({ message: 'photographed place created.'});
-        //   console.log(photos);
-        // });
+      Property.findOne({id: MLS}, (error, property)=> {
+        if(error) {
+          res.status(422)
+          console.log({error})
+          return
+        }
+        property.images.push(result.uri)
+        property.save((e, prop) => {
+          if(e){
+            console.log({e})
+            return
+          }
+          console.log(`***Saved Property w/image: *** ${prop}`)
+        })
+      })
     })
-
    })	
 })
+router.post('/property', (req, res) => {
+  const { address, beds, baths, sqft, price,} = req.body
+  const images = [];
+
+  const newProperty = new Property({address, beds, baths, sqft, price, images})
+  newProperty.save((error, property) => {
+    if (error) {
+      console.log(error);
+      res.status(422)
+      return
+    }
+    console.log(`***Property added: ****${JSON.stringify(property)}`);
+  })
+})
+router.post('/propertypic', (req,res) => {
+  const { MLS } = req.body
+  Property.findOne({id: MLS}, (error, property) => {
+    if(error){
+      console.log(`***PropertyPicError: *** ${error}`);
+      return
+    }
+    res.json({images: property.images})
+  })
+})
+
+router.post('/newOpenHouse', (req, res)=> {
+  const { MLS, date, image, phoneq,
+          agentq, sourceq, imageq,
+          priceq, bedbathq, squareftq,
+          hashtagsq, hashtags} = req.body
+  const leads = []
+  const property = MLS
+  const newOpenHouse = new OpenHouse({ 
+    property, date, image, phoneq,
+    agentq, sourceq, imageq,
+    priceq, bedbathq, squareftq,
+    hashtagsq, hashtags, leads})
+  newOpenHouse.save((error, openHouse)=> {
+    if(error) {
+      res.status(422)
+      console.log(`***newOpenHouseError: *** ${error}`);
+    }
+    res.send({openHouse})
+  })
+})
+
+router.post('/addlead', (req, res) => {
+  const {openHouseId, name, email, phone, agent, source } = req.body
+  const newLead = new Lead({ name, email, phone, agent, source })
+  OpenHouse.findOne({id: openHouseId}, (error, openHouse) => {
+    if(error) {
+      console.log(`***Error in addlead: *** ${error}`);
+      return
+    }
+    newLead.save((err, lead)=> {
+      if(err){
+        console.log(`***addlead save error: ${err}**`);
+        return
+      }
+      openHouse.leads.push(lead.id)
+      openHouse.save((e, openhouse) => {
+        if(e){
+          console.log(`***Error in saving openHouse: ${e}***`);
+          return
+        }
+        console.log(`***Saved OpenHouse: ${openhouse}`);
+      })
+    })
+  })
+})
+router.post('/openhouses', (req, res) => {
+  const { userId } = req.body
+  User.findOne({id: userId})
+    .populate('openHouses')
+    .exec((error, user)=> {
+      if(error) {
+        console.log(`Error in finding openhouses: ${error}`);
+        return
+      }
+      res.json({openhouses})
+    })
+})
+
 
 module.exports = router
