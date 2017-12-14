@@ -155,9 +155,21 @@ router.post('/openhouses', (req, res) => {
         console.log(`Error in finding openhouses: ${error}`);
         return
       }
-      res.json({openhouses})
+      res.json({openhouses: user.openhouses})
     })
 })
 
+router.post('/leads', (req, res) => {
+  const { openHouseId } = req.body
+  OpenHouse.findOne({id: openHouseId})
+    .populate('leads')
+    .exec((error, openHouse)=> {
+      if(error) {
+        console.log(`Error in finding leads: ${error}`);
+        return
+      }
+      res.json({leads: openHouse.leads})
+    })
+})
 
 module.exports = router
