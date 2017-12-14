@@ -20,31 +20,31 @@ creates a user POST
 ## Photo
 `POST '/photo'`
 adds a photo to a property listing
-# Parameters
+#### Parameters
 `(MLS)`
-# Return value
+#### Return value
 cloudinary upload info in `{result}`
 
 ## Property
 `POST '/property'`
 creates a new property
-# Parameters
+#### Parameters
 `( address, beds, baths, sqft, price )`
-# Return value
+#### Return value
   `None`
 
 ## Property Picture
 `POST '/propertypic'`
 finds all of the given uri's for a property's pictures
-# Parameters
+#### Parameters
 `(MLS)`
-# Return value
+#### Return value
 `{images}` an array of  uri strings
 
 ## NewOpenHouse
 `POST '/newOpenHouse'`
 creates a new open house
-# Parameters
+#### Parameters
 the q properties are booleans that relate to the render method
 ``` 
     ( MLS, date, image, phoneq,
@@ -52,32 +52,32 @@ the q properties are booleans that relate to the render method
     priceq, bedbathq, squareftq,
     hashtagsq, hashtags ) 
 ```
-# Return value
+#### Return value
 the new openhouse `{openHouse}`
 
 ## AddLead
 `POST '/addlead'`
 creates a new lead
-# Parameters
+#### Parameters
 ``` 
     ( openHouseId, name, email, phone, agent, source  ) 
 ```
-# Return value
+#### Return value
 `None`
 
 ## ListOpenHouses
 `POST '/openhouses'`
 lists the users past open houses
-# Parameters
+#### Parameters
 `(userId)`
-# Return value
+#### Return value
 a list of the past open houses in `{openHouses}`
 
 ## ListLeads
 `POST '/leads'`
 lists the open house's leads
-# Parameters
+#### Parameters
 `(openHouseId)`
-# Return value
+#### Return value
 a list of the past open house's leads in `{ leads }`
 
