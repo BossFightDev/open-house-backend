@@ -24,7 +24,7 @@ router.get('/listings', (req, res) => {
       console.log(error)
       return
     }
-    res.json({properties})
+    res.send({properties})
   })
 })
 
@@ -77,7 +77,7 @@ router.post('/photo', function(req,res){
    })	
 })
 router.post('/property', (req, res) => {
-  const { address, beds, baths, sqft, price,} = req.body
+  const { address, beds, baths, sqft, price } = req.body
   const images = [];
 
   const newProperty = new Property({address, beds, baths, sqft, price, images})
@@ -155,7 +155,7 @@ router.post('/openhouses', (req, res) => {
         console.log(`Error in finding openhouses: ${error}`);
         return
       }
-      res.json({openhouses: user.openhouses})
+      res.send({openhouses: user.openhouses})
     })
 })
 
