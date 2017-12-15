@@ -13,7 +13,7 @@ a list of properties inside `{properties}`
 `POST '/user'`
 creates a user POST
 #### Parameters
-`( firstname, lastname, username, password, phonenumber, company )`
+`( firstName, lastName, username, password, phoneNumber, company )`
 #### Return value
 `None`
 
@@ -47,10 +47,10 @@ creates a new open house
 #### Parameters
 the q properties are booleans that relate to the render method
 ``` 
-    ( MLS, date, image, phoneq,
-    agentq, sourceq, imageq,
-    priceq, bedbathq, squareftq,
-    hashtagsq, hashtags ) 
+    ( MLS, date, image, phoneQ,
+    agentQ, sourceQ, imageQ,
+    priceQ, bedbathQ, sqftq,
+    hashtagQ, hashtags ) 
 ```
 #### Return value
 the new openhouse `{openHouse}`

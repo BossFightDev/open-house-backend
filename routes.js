@@ -29,8 +29,9 @@ router.get('/listings', (req, res) => {
 })
 
 router.post('/user', (req, res) => {
-  const {firstname, lastname, username, password, phonenumber, company } = req.body
-  const newUser = new User({firstname, lastname, username, password, phonenumber, company })
+  const {firstName, lastName, username, password, phoneNumber, company } = req.body
+  const companyPicture = ''
+  const newUser = new User({firstname, lastname, username, password, phonenumber, company, companyPicture })
   newUser.save((error, user) => {
     if (error) {
       console.log(error);
@@ -102,17 +103,17 @@ router.post('/propertypic', (req,res) => {
 })
 
 router.post('/newOpenHouse', (req, res)=> {
-  const { MLS, date, image, phoneq,
-          agentq, sourceq, imageq,
-          priceq, bedbathq, squareftq,
-          hashtagsq, hashtags} = req.body
+  const { MLS, date, image, phoneQ,
+          agentQ, sourceQ, imageQ,
+          priceQ, bedBathQ, squareftQ,
+          hashtagQ, hashtags} = req.body
   const leads = []
   const property = MLS
   const newOpenHouse = new OpenHouse({ 
-    property, date, image, phoneq,
-    agentq, sourceq, imageq,
-    priceq, bedbathq, squareftq,
-    hashtagsq, hashtags, leads})
+    property, date, image, phoneQ,
+    agentQ, sourceQ, imageQ,
+    priceQ, bedBathQ, sqftQ,
+    hashtagQ, hashtags, leads})
   newOpenHouse.save((error, openHouse)=> {
     if(error) {
       res.status(422)
