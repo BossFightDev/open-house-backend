@@ -15,6 +15,7 @@ const PropertySchema = new Schema({
   sqft: Number,
   images: [String],
   price: Number,
+  MLS: Number,
 })
 
 const LeadSchema = new Schema({

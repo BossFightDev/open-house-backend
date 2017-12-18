@@ -54,8 +54,9 @@ finds all of the given uri's for a property's pictures
 creates a new open house
 #### Parameters
 the q properties are booleans that relate to the render method
+the id is a id of a property.
 ``` 
-    ( MLS, date, image, phoneQ,
+    ( id, date, image, phoneQ,
     agentQ, sourceQ, imageQ,
     priceQ, bedbathQ, sqftq,
     hashtagQ, hashtags ) 

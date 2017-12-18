@@ -75,7 +75,7 @@ router.post('/photo', (req,res) => {
     cloudinary.uploader.upload(req.file.path, function(result) { 
       console.log(result);
       res.send(result)
-      Property.findOne({id: MLS}, (error, property)=> {
+      Property.findOne({MLS}, (error, property)=> {
         if(error) {
           res.status(422)
           console.log({error})
@@ -109,7 +109,7 @@ router.post('/property', (req, res) => {
 })
 router.post('/propertypic', (req,res) => {
   const { MLS } = req.body
-  Property.findOne({id: MLS}, (error, property) => {
+  Property.findOne({MLS}, (error, property) => {
     if(error){
       console.log(`***PropertyPicError: *** ${error}`);
       return
@@ -119,12 +119,12 @@ router.post('/propertypic', (req,res) => {
 })
 
 router.post('/newOpenHouse', (req, res)=> {
-  const { MLS, date, image, phoneQ,
+  const { id, date, image, phoneQ,
           agentQ, sourceQ, imageQ,
           priceQ, bedBathQ, squareftQ,
           hashtagQ, hashtags} = req.body
   const leads = []
-  const property = MLS
+  const property = id
   const newOpenHouse = new OpenHouse({ 
     property, date, image, phoneQ,
     agentQ, sourceQ, imageQ,
