@@ -28,6 +28,17 @@ router.get('/listings', (req, res) => {
   })
 })
 
+router.post('/findProperty', (req, res) => {
+  const { MLS } = req.body
+  Property.findOne({ MLS }, (error, property) => {
+    if(error) {
+      console.log(error)
+      return
+    }
+    res.send({property})
+  })
+})
+
 router.post('/user', (req, res) => {
   const {firstName, lastName, username, password, phoneNumber, company } = req.body
   const companyPicture = 'http://res.cloudinary.com/bossfight/image/upload/v1513200109/ybknnlqfa0pmwaztokcc.jpg'

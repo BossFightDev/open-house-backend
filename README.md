@@ -9,6 +9,15 @@
 #### Return value
 a list of properties inside `{properties}`
 
+##Find Property
+`POST '/findProperty'`
+  Gets a single property's info
+#### Parameters
+`( MLS )`
+#### Return Value
+a single `{property}`
+
+
 ## User
 `POST '/user'`
 creates a user POST
