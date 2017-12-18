@@ -30,8 +30,8 @@ router.get('/listings', (req, res) => {
 
 router.post('/user', (req, res) => {
   const {firstName, lastName, username, password, phoneNumber, company } = req.body
-  const companyPicture = ''
-  const newUser = new User({firstname, lastname, username, password, phonenumber, company, companyPicture })
+  const companyPicture = 'http://res.cloudinary.com/bossfight/image/upload/v1513200109/ybknnlqfa0pmwaztokcc.jpg'
+  const newUser = new User({firstName, lastName, username, password, phoneNumber, company, companyPicture })
   newUser.save((error, user) => {
     if (error) {
       console.log(error);
@@ -41,7 +41,22 @@ router.post('/user', (req, res) => {
     console.log(`***User added: ****${JSON.stringify(user)}`)
   })
 })
-router.post('/photo', function(req,res){
+
+router.post('/login', (req, res) => {
+  const { username, password } = req.body
+  User.findOne({username})
+    .exec((err, user)=> {
+      if (error) {
+        console.log(error);
+        res.status(422)
+        return
+      }
+      user.password === password ? res.send(user) : res.send({err: 'Please use correct credentials'})
+    })
+
+})
+
+router.post('/photo', (req,res) => {
   const { MLS } = req.body
 	upload(req, res, function(err){	
 		if(err){

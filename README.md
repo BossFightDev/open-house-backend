@@ -17,6 +17,14 @@ creates a user POST
 #### Return value
 `None`
 
+## Login
+`POST '/login'`
+login to the api
+#### Parameters
+`( username, password)`
+#### Return value
+`a { user } object`
+
 ## Photo
 `POST '/photo'`
 adds a photo to a property listing
