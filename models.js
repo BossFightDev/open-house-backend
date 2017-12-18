@@ -64,7 +64,7 @@ const UserSchema = new Schema({
 
 Property = mongoose.model("Property", PropertySchema)
 Lead = mongoose.model("Lead", LeadSchema)
-OpenHouse = mongoose.model("OpenHouse", OpenHouseSchema),
+OpenHouse = mongoose.model("OpenHouse", OpenHouseSchema)
 User = mongoose.model("User", UserSchema)
 
 module.exports = {

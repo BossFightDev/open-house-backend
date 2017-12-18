@@ -94,10 +94,10 @@ router.post('/photo', (req,res) => {
    })	
 })
 router.post('/property', (req, res) => {
-  const { address, beds, baths, sqft, price } = req.body
+  const { address, beds, baths, sqft, price, MLS } = req.body
   const images = [];
 
-  const newProperty = new Property({address, beds, baths, sqft, price, images})
+  const newProperty = new Property({address, beds, baths, sqft, price, images, MLS})
   newProperty.save((error, property) => {
     if (error) {
       console.log(error);
