@@ -45,6 +45,7 @@ router.post('/user', (req, res) => {
 router.post('/login', (req, res) => {
   const { username, password } = req.body
   User.findOne({username})
+    .populate('openhouses')
     .exec((error, user)=> {
       if (error) {
         console.log(error);
