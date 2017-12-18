@@ -45,7 +45,7 @@ router.post('/user', (req, res) => {
 router.post('/login', (req, res) => {
   const { username, password } = req.body
   User.findOne({username})
-    .exec((err, user)=> {
+    .exec((error, user)=> {
       if (error) {
         console.log(error);
         res.status(422)
