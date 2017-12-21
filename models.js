@@ -56,7 +56,7 @@ const UserSchema = new Schema({
   company: String,
   companyPicture: String,
   email: String,
-  openhouses: [{
+  openHouses: [{
     type: Schema.Types.ObjectId,
     ref: "OpenHouse"
   }]
