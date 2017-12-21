@@ -14,6 +14,18 @@ const api_secret = process.env.APISECRET || config.apiSecret
 //   api_secret,
 // })
 
+const sendUserError = (err, res) => {
+  res.status(422);
+  if (err && err.message) {
+    res.json({
+      message: err.message,
+      stack: err.stack,
+    });
+    return
+  }
+  res.json(err);
+}
+
 const upload = multer({ dest : './public/uploads'}).single('photo')
 
 const router = express.Router()
@@ -55,6 +67,10 @@ router.post('/user', (req, res) => {
 
 router.post('/login', (req, res) => {
   const { username, password } = req.body
+  if (password === "") {
+    sendUserError("Please input a valid password", res);
+    return;
+  }
   User.findOne({username})
     .populate('openhouses')
     .exec((error, user)=> {
@@ -63,6 +79,7 @@ router.post('/login', (req, res) => {
         res.status(422)
         return
       }
+      console.log({user})
       user.password === password ? res.send(user) : res.send({err: 'Please use correct credentials'})
     })
 
