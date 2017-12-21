@@ -47,6 +47,7 @@ router.post('/findProperty', (req, res) => {
       console.log(error)
       return
     }
+    console.log(`***Successful property search***`)
     res.send({property})
   })
 })
