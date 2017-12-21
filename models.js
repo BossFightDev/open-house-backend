@@ -19,7 +19,10 @@ const PropertySchema = new Schema({
 })
 
 const LeadSchema = new Schema({
-  name: String,
+  name: {
+    required: true,
+    type: String,
+  },
   email: String,
   phone: Number,
   agent: String,
@@ -50,8 +53,15 @@ const OpenHouseSchema = new Schema({
 const UserSchema = new Schema({
   firstName: String,
   lastName: String,
-  username: String,
-  password: String,
+  username: {
+    required: true,
+    type: String,
+    unique: true,
+  },
+  password: {
+    type: String,
+    required: true,
+  },
   phoneNumber: Number,
   company: String,
   companyPicture: String,

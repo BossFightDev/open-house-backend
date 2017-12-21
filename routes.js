@@ -73,7 +73,11 @@ router.post('/login', (req, res) => {
     return;
   }
   User.findOne({username})
-    .populate('openhouses')
+    .populate({
+      path: 'openHouses',
+      // Get friends of friends - populate the 'friends' array for every friend
+      populate: { path: 'property' }
+    })
     .exec((error, user)=> {
       if (error) {
         console.log(error);
