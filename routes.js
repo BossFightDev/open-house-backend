@@ -152,7 +152,7 @@ router.post('/propertypic', (req,res) => {
 })
 
 router.post('/newOpenHouse', (req, res)=> {
-  const { id, date, image, phoneQ,
+  const { uID, id, date, image, phoneQ,
           agentQ, sourceQ, suggestQ, imageQ,
           priceQ, bedBathQ, sqftQ,
           hashtagQ, hashtags} = req.body
@@ -160,15 +160,32 @@ router.post('/newOpenHouse', (req, res)=> {
   const property = id
   const newOpenHouse = new OpenHouse({ 
     property, date, image, phoneQ,
-    agentQ, sourceQ, imageQ,
+    agentQ, sourceQ, suggestQ, imageQ,
     priceQ, bedBathQ, sqftQ,
     hashtagQ, hashtags, leads})
   newOpenHouse.save((error, openHouse)=> {
     if(error) {
       res.status(422)
       console.log(`***newOpenHouseError: *** ${error}`);
+      return
     }
     res.send({openHouse})
+    user.findOne({id: uID}, (err, user) => {
+      if(err) {
+        res.status(422)
+        console.log(`***Trouble finding user: *** ${err}`)
+        return
+      }
+      user.openHouses.push(openHouse.id)
+      user.save((e, user)=> {
+        if(e) {
+          res.status(422)
+          console.log(`error saving user in newOpenHouse: ${e}`)
+          return;
+        }
+        console.log(user.openHouses)
+      })
+    })
   })
 })
 
