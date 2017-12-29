@@ -45,7 +45,7 @@ const OpenHouseSchema = new Schema({
     type: String,
   },
   phoneQ:{
-    required: trues,
+    required: true,
     type: Boolean,
   },
   agentQ: {
