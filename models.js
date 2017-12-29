@@ -33,17 +33,53 @@ const OpenHouseSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: "Property"
   },
-  date: Date,
-  guests: Number,
-  image: String,
-  phoneQ: Boolean,
-  agentQ: Boolean,
-  suggestQ: Boolean,
-  imageQ: Boolean,
-  priceQ: Boolean,
-  bedBathQ: Boolean,
-  sqftQ: Boolean,
-  hashtagQ: Boolean,
+  date: {
+    required: true,
+    type: Date,
+  },
+  guests:{
+    type: Number,
+  },
+  image: {
+    required: true,
+    type: String,
+  },
+  phoneQ:{
+    required: trues,
+    type: Boolean,
+  },
+  agentQ: {
+    required: true,
+    type: Boolean,
+  },
+  sourceQ: {
+    required: true,
+    type: Boolean,
+  },
+  suggestQ: {
+    required: true,
+    type: Boolean,
+  },
+  imageQ: {
+    required: true,
+    type: Boolean,
+  },
+  priceQ: {
+    required: true,
+    type: Boolean,
+  },
+  bedBathQ: {
+    required: true,
+    type: Boolean,
+  },
+  sqftQ: {
+    required: true,
+    type: Boolean,
+  },
+  hashtagQ: {
+    required: true,
+    type: Boolean,
+  },
   hashtags:[String],
   leads: [{
     type: Schema.Types.ObjectId,
