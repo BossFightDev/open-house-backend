@@ -152,7 +152,7 @@ router.post('/propertypic', (req,res) => {
 })
 
 router.post('/newOpenHouse', (req, res)=> {
-  const { uID, id, date, image, phoneQ,
+  const { uId, id, date, image, phoneQ,
           agentQ, sourceQ, suggestQ, imageQ,
           priceQ, bedBathQ, sqftQ,
           hashtagQ, hashtags} = req.body
@@ -170,7 +170,7 @@ router.post('/newOpenHouse', (req, res)=> {
       return
     }
     res.send({openHouse})
-    user.findOne({id: uID}, (err, user) => {
+    User.findOne({id: uId}, (err, user) => {
       if(err) {
         res.status(422)
         console.log(`***Trouble finding user: *** ${err}`)
