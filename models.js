@@ -38,6 +38,7 @@ const OpenHouseSchema = new Schema({
   image: String,
   phoneQ: Boolean,
   agentQ: Boolean,
+  suggestQ: Boolean,
   imageQ: Boolean,
   priceQ: Boolean,
   bedBathQ: Boolean,

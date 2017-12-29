@@ -67,7 +67,7 @@ the id is a id of a property.
 ``` 
     ( id, date, image, phoneQ,
     agentQ, sourceQ, imageQ,
-    priceQ, bedbathQ, sqftq,
+    suggestQ, priceQ, bedbathQ, sqftq,
     hashtagQ, hashtags ) 
 ```
 #### Return value

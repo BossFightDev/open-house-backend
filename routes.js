@@ -153,7 +153,7 @@ router.post('/propertypic', (req,res) => {
 
 router.post('/newOpenHouse', (req, res)=> {
   const { id, date, image, phoneQ,
-          agentQ, sourceQ, imageQ,
+          agentQ, sourceQ, suggestQ, imageQ,
           priceQ, bedBathQ, sqftQ,
           hashtagQ, hashtags} = req.body
   const leads = []
