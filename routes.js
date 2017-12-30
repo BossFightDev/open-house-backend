@@ -76,7 +76,8 @@ router.post('/login', (req, res) => {
     .populate({
       path: 'openHouses',
       // Get friends of friends - populate the 'friends' array for every friend
-      populate: { path: 'property' }
+      populate: { path: 'property' },
+      populate: { path: 'leads'}
     })
     .exec((error, user)=> {
       if (error) {
@@ -157,12 +158,14 @@ router.post('/newOpenHouse', (req, res)=> {
           priceQ, bedBathQ, sqftQ,
           hashtagQ, hashtags} = req.body
   const leads = []
+  console.log(`id`)
   const property = id
   const newOpenHouse = new OpenHouse({ 
-    property, date, image, phoneQ,
+    date, image, phoneQ,
     agentQ, sourceQ, suggestQ, imageQ,
     priceQ, bedBathQ, sqftQ,
     hashtagQ, hashtags, leads})
+    newOpenHouse.property = id
   newOpenHouse.save((error, openHouse)=> {
     if(error) {
       res.status(422)
