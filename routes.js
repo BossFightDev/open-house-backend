@@ -80,10 +80,6 @@ router.post('/login', (req, res) => {
         path: 'property',
         model: 'Property'
       },
-      populate: { 
-        path: 'leads',
-        model: 'Lead'
-      }
     })
     .exec((error, user)=> {
       if (error) {
