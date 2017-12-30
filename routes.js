@@ -160,6 +160,7 @@ router.post('/newOpenHouse', (req, res)=> {
   const leads = []
   console.log(`id`)
   const property = id
+  console.log(`PROPERTY: ${property}`)
   const newOpenHouse = new OpenHouse({ 
     date, image, phoneQ,
     agentQ, sourceQ, suggestQ, imageQ,
