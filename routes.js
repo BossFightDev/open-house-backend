@@ -81,6 +81,14 @@ router.post('/login', (req, res) => {
         model: 'Property'
       }
     })
+    .populate({
+      path: 'openHouses',
+      // Get friends of friends - populate the 'friends' array for every friend
+      populate: { 
+        path: 'leads',
+        model: 'Lead'
+      }
+    })
     .exec((error, user)=> {
       if (error) {
         console.log(error);
