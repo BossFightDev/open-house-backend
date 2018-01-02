@@ -257,7 +257,7 @@ router.post('/leads', (req, res) => {
         console.log(`Error in finding leads: ${error}`);
         return
       }
-      res.json({user})
+      res.send(user)
     })
 })
 
