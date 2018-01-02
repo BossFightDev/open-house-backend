@@ -79,6 +79,10 @@ router.post('/login', (req, res) => {
       populate: { 
         path: 'property',
         model: 'Property'
+      },
+      populate: {
+        path: 'leads',
+        model: 'Lead'
       }
     })
     .exec((error, user)=> {
