@@ -243,15 +243,15 @@ router.post('/openhouses', (req, res) => {
 router.post('/leads', (req, res) => {
   const { uID } = req.body
   console.log('passed user id ' + uID)
-  User.findOne({id: uID})
-  .populate({
-    path: 'openHouses',
-    // Get friends of friends - populate the 'friends' array for every friend
-    populate: { 
-      path: 'leads',
-      model: 'Lead'
-    }
-  })
+  User.findbyId(uID)
+    .populate({
+      path: 'openHouses',
+      // Get friends of friends - populate the 'friends' array for every friend
+      populate: { 
+        path: 'leads',
+        model: 'Lead'
+      }
+    })
     .exec((error, user)=> {
       if(error) {
         console.log(`Error in finding leads: ${error}`);
