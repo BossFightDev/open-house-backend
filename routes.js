@@ -257,7 +257,6 @@ router.post('/leads', (req, res) => {
         console.log(`Error in finding leads: ${error}`);
         return
       }
-      console.log(`found user object ${user}`)
       res.json({user})
     })
 })
