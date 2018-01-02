@@ -169,7 +169,7 @@ router.post('/newOpenHouse', (req, res)=> {
           hashtagQ, hashtags} = req.body
   const leads = []
   const guests = 0
-  console.log(`id`)
+  console.log(`id` + id)
   const property = id
   console.log(`PROPERTY: ${property}`)
   const newOpenHouse = new OpenHouse({ 
