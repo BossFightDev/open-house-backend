@@ -251,12 +251,12 @@ router.post('/leads', (req, res) => {
       model: 'Lead'
     }
   })
-    .exec((error, openHouse)=> {
+    .exec((error, user)=> {
       if(error) {
         console.log(`Error in finding leads: ${error}`);
         return
       }
-      res.json({leads: openHouse.leads})
+      res.json({user})
     })
 })
 
