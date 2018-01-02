@@ -185,7 +185,7 @@ router.post('/newOpenHouse', (req, res)=> {
       return
     }
     res.send({openHouse})
-    User.findOne({id: uId}, (err, user) => {
+    User.findById( uId, (err, user) => {
       if(err) {
         res.status(422)
         console.log(`***Trouble finding user: *** ${err}`)
@@ -207,7 +207,7 @@ router.post('/newOpenHouse', (req, res)=> {
 router.post('/addlead', (req, res) => {
   const {openHouseId, name, email, phone, agent, source } = req.body
   const newLead = new Lead({ name, email, phone, agent, source })
-  OpenHouse.findOne({id: openHouseId}, (error, openHouse) => {
+  OpenHouse.findById( openHouseId, (error, openHouse) => {
     if(error) {
       console.log(`***Error in addlead: *** ${error}`);
       return
@@ -237,7 +237,7 @@ router.post('/addlead', (req, res) => {
 })
 router.post('/openhouses', (req, res) => {
   const { userId } = req.body
-  User.findOne({id: userId})
+  User.findById(userId)
     .populate('openHouses')
     .exec((error, user)=> {
       if(error) {
