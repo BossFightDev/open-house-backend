@@ -210,10 +210,13 @@ router.post('/addlead', (req, res) => {
         return
       }
       openHouse.leads.push(lead.id)
-      let { guests } = openHouse
-      console.log('guests ' + openHouse.guests)
-      guests++
-      openHouse.guests = guests;
+      if(!openHouse.guests) openHouse.guests = 1
+      else{
+        let { guests } = openHouse
+        console.log('guests ' + openHouse.guests)
+        guests++
+        openHouse.guests = guests;
+      }
       openHouse.save((e, openhouse) => {
         if(e){
           console.log(`***Error in saving openHouse: ${e}***`);
