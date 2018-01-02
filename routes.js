@@ -243,7 +243,7 @@ router.post('/openhouses', (req, res) => {
 router.post('/leads', (req, res) => {
   const { uID } = req.body
   console.log('passed user id ' + uID)
-  User.findbyId(uID)
+  User.findById(uID)
     .populate({
       path: 'openHouses',
       // Get friends of friends - populate the 'friends' array for every friend
