@@ -242,6 +242,7 @@ router.post('/openhouses', (req, res) => {
 
 router.post('/leads', (req, res) => {
   const { uID } = req.body
+  console.log('passed user id ' + uID)
   User.findOne({id: uID})
   .populate({
     path: 'openHouses',
@@ -256,6 +257,7 @@ router.post('/leads', (req, res) => {
         console.log(`Error in finding leads: ${error}`);
         return
       }
+      console.log(`found user object ${user}`)
       res.json({user})
     })
 })
