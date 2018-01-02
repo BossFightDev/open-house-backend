@@ -79,10 +79,6 @@ router.post('/login', (req, res) => {
       populate: { 
         path: 'property',
         model: 'Property'
-      },
-      populate: {
-        path: 'leads',
-        model: 'Lead'
       }
     })
     .exec((error, user)=> {
@@ -216,7 +212,7 @@ router.post('/addlead', (req, res) => {
       openHouse.leads.push(lead.id)
       if(!openHouse.guests) openHouse.guests = 1
       else{
-        let { guests } = openHouse
+      let { guests } = openHouse
         console.log('guests ' + openHouse.guests)
         guests++
         openHouse.guests = guests;
@@ -245,9 +241,16 @@ router.post('/openhouses', (req, res) => {
 })
 
 router.post('/leads', (req, res) => {
-  const { openHouseId } = req.body
-  OpenHouse.findOne({id: openHouseId})
-    .populate('leads')
+  const { uID } = req.body
+  User.findOne({id: uID})
+  .populate({
+    path: 'openHouses',
+    // Get friends of friends - populate the 'friends' array for every friend
+    populate: { 
+      path: 'leads',
+      model: 'Lead'
+    }
+  })
     .exec((error, openHouse)=> {
       if(error) {
         console.log(`Error in finding leads: ${error}`);
