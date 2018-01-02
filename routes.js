@@ -211,6 +211,7 @@ router.post('/addlead', (req, res) => {
       }
       openHouse.leads.push(lead.id)
       let { guests } = openHouse
+      console.log('guests ' + openHouse.guests)
       guests++
       openHouse.guests = guests;
       openHouse.save((e, openhouse) => {
