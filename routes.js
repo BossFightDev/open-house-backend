@@ -79,7 +79,7 @@ router.post('/login', (req, res) => {
       populate: { 
         path: 'property',
         model: 'Property'
-      },
+      }
     })
     .exec((error, user)=> {
       if (error) {
@@ -160,11 +160,12 @@ router.post('/newOpenHouse', (req, res)=> {
           priceQ, bedBathQ, sqftQ,
           hashtagQ, hashtags} = req.body
   const leads = []
+  const guests = 0
   console.log(`id`)
   const property = id
   console.log(`PROPERTY: ${property}`)
   const newOpenHouse = new OpenHouse({ 
-    date, image, phoneQ,
+    date, guests, image, phoneQ,
     agentQ, sourceQ, suggestQ, imageQ,
     priceQ, bedBathQ, sqftQ,
     hashtagQ, hashtags, leads})
@@ -209,6 +210,9 @@ router.post('/addlead', (req, res) => {
         return
       }
       openHouse.leads.push(lead.id)
+      let { guests } = OpenHouse
+      guests++
+      openHouse.guests = guests;
       openHouse.save((e, openhouse) => {
         if(e){
           console.log(`***Error in saving openHouse: ${e}***`);
