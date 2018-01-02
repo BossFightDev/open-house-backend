@@ -260,6 +260,14 @@ router.post('/leads', (req, res) => {
         model: 'Lead'
       }
     })
+    .populate({
+      path: 'openHouses',
+      // Get friends of friends - populate the 'friends' array for every friend
+      populate: { 
+        path: 'property',
+        model: 'Property'
+      }
+    })
     .exec((error, user)=> {
       if(error) {
         console.log(`Error in finding leads: ${error}`);
