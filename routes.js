@@ -210,7 +210,7 @@ router.post('/addlead', (req, res) => {
         return
       }
       openHouse.leads.push(lead.id)
-      let { guests } = OpenHouse
+      let { guests } = openHouse
       guests++
       openHouse.guests = guests;
       openHouse.save((e, openhouse) => {
