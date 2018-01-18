@@ -54,7 +54,7 @@ router.post('/findProperty', (req, res) => {
 
 router.post('/user', (req, res) => {
   const {firstName, lastName, username, password, phoneNumber, company } = req.body
-  const companyPicture = 'http://res.cloudinary.com/bossfight/image/upload/v1513200109/ybknnlqfa0pmwaztokcc.jpg'
+  const companyPicture = 'https://www.engageremarketing.com/wp-content/uploads/2017/09/Popular-Logo-Tile-300x200-300x200.png'
   const newUser = new User({firstName, lastName, username, password, phoneNumber, company, companyPicture })
   newUser.save((error, user) => {
     if (error) {
